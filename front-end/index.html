@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./img/newlogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <title>Frasoltar</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <header class="header-cont">
+        <div class="logo-cont">
+            <img src="./img/newlogo.png" alt="Logo di Frasoltar" width="250" height="250" />
+        </div>
+        <div class="testo-cont">
+            <h1 class="titolo-azienda">Frasoltar</h1><br>
+            <h3 class="claim-azienda">Acquista Biglietti in Provincia di Foggia</h3>
+        </div>
+        <div class="menu-cont">
+            <nav class="menu">
+                <a href="./pages/signup.html" id="signup-btn">Registrati</a>
+                <a href="./pages/login.html" id="login-btn">Accedi</a>
+            </nav>
+            <div id="user-info" style="display: none;">
+                <i class="bi bi-person-circle" style="font-size: 30px; color: #007bff;"></i>
+                <span id="username" style="font-size: 24px; font-weight: bold; margin-left: 10px;"></span>
+            </div>
+        </div>       
+    </header>
+    <main>
+        <div class="container-pullman">
+            <img src="./img/pullman.png" alt="Pullman">
+        </div>
+        <div class="container">
+            <section id="pullman">
+                <h2>Pullman</h2>
+                <form id="pullmanForm">
+                    <label for="luogo-partenza-pullman">Luogo di Partenza</label>
+                    <select id="luogo-partenza-pullman" name="partenza" required>
+                        <option value="">Seleziona il luogo di partenza</option>
+                    </select>
+                    
+                    <label for="luogo-arrivo-pullman">Luogo di Arrivo</label>
+                    <select id="luogo-arrivo-pullman" name="arrivo" required>
+                        <option value="">Seleziona il luogo di arrivo</option>
+                    </select>
+                    
+                    <label for="data-pullman">Data e Ora</label>
+                    <input type="datetime-local" id="data-pullman" name="data" required>
+                    
+                    <!-- <label for="posti-pullman">Numero di Posti</label>
+                    <input type="number" id="posti-pullman" name="posti" min="1" max="10" required> -->
+                    
+                    <button type="submit">Cerca Biglietto Pullman</button>
+                </form>
+            </section>
+            
+            <section id="treni">
+                <h2>Treni</h2>
+                <form id="treniForm">
+                    <label for="luogo-partenza-treni">Luogo di Partenza</label>
+                    <select id="luogo-partenza-treni" name="partenza" required>
+                        <option value="">Seleziona il luogo di partenza</option>
+                    </select>
+                    
+                    <label for="luogo-arrivo-treni">Luogo di Arrivo</label>
+                    <select id="luogo-arrivo-treni" name="arrivo" required>
+                        <option value="">Seleziona il luogo di arrivo</option>
+                    </select>
+                    
+                    <label for="data-treni">Data e Ora</label>
+                    <input type="datetime-local" id="data-treni" name="data" required>
+                    
+                    <!-- <label for="posti-treni">Numero di Posti</label>
+                    <input type="number" id="posti-treni" name="posti" min="1" max="10" required> -->
+                    <button type="submit">Cerca Biglietto Treno</button>
+                </form>
+            </section>
+        </div>
+        <div class="container-pullman">
+            <img src="./img/treno.png" alt="Treno">
+        </div>
+    </main>
+    <script src="./js/script.js"></script>
+</body>
+</html>

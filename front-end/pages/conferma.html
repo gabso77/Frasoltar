@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/newlogo.png" type="image/x-icon"> 
+    <title>Frasoltar - Conferma Acquisto</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css"> 
+</head>
+<body>
+    <header class="header-cont">
+        <div class="logo-cont">
+            <img src="../img/newlogo.png" alt="Logo di Frasoltar" width="250" height="250" /> 
+        </div>
+        <div class="testo-cont">
+            <h1 class="titolo-azienda">Frasoltar</h1>
+            <h3 class="claim-azienda"> Acquista Biglietti in Provincia di Foggia</h3>
+        </div>
+        <div class="menu-cont">
+            <nav class="menu">
+                <a href="../index.html">Home</a>
+                <a href="./signup.html">Registrati</a> 
+                <a href="./login.html">Accedi</a> 
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container-pullman">
+            <img src="../img/pullman.png" alt="Pullman"> 
+        </div> 
+        <div class="container">
+                <h2>Seleziona il numero di posti</h2>
+    <form onsubmit="return false;">
+        <div id="datirigascelta"></div>
+        <label for="numero-posti">Numero di posti (da 1 a 10):</label>
+        <select id="numero-posti" onchange="aggiornaRiepilogo()">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </form>
+<button onclick="redirectToPage()">Conferma Acquisto</button>
+    <div id="riepilogo"></div>
+        </div>
+        <div class="container-pullman">
+            <img src="../img/treno.png" alt="Treno"> 
+        </div>
+    </main>
+    <script src="../js/script.js"></script>
+</body>
+</html>

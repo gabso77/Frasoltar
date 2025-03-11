@@ -1,0 +1,151 @@
+/* Impostazioni di base */
+body {
+    font-family: 'Franklin Gothic Medium';
+    margin: 0; /* Rimuove margini di default */
+    padding: 0; /* Rimuove padding di default */
+    background-color: #f5f5dc; /* Colore di sfondo generale della pagina */
+    overflow-x: hidden;
+}
+
+/* Stile per il main */
+main {
+    display: flex;
+    align-items: stretch; /* Estende i contenitori verso l'alto */
+    justify-content: center; /* Centra orizzontalmente */
+    min-height: calc(100vh - 60px); /* Uso invece di height */
+    margin: 0; /* Assicura che non ci siano margini */
+}
+
+.container-pullman {
+    /* Regole esistenti per .container-pullman */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+ 
+    height: auto;
+    max-width: 100%;
+    margin: 0;
+ 
+
+    /* Regole per le immagini, spostate qui */
+    img{
+       max-width: 100%;
+        height: 100%;
+       object-fit: fill;
+    }
+}
+
+
+/* Stile per il contenitore principale */
+.container {
+    display: flex;
+    flex-direction: column; /* Disporre in verticale */
+    background-color: #e6d4c9; /* Marroncino chiaro per il contenitore */
+    padding: 40px;
+    min-width: 600px;
+    white-space: nowrap;
+}
+/* Header e menu */
+header {
+    background-color: rgb(233, 228, 228); /* Marroncino chiaro per l'intestazione */
+    padding: 20px;
+    position: relative; /* Posizione relativa per il posizionamento degli elementi */
+    z-index: 1; /* Porta l'header in primo piano */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Link di navigazione */
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #5b3a29; /* Colore del testo per i link */
+    font-weight: bold;
+}
+
+/* Stile per il modulo */
+form {
+    display: flex;
+    flex-direction: column; /* Disposizione verticale dei campi */
+    margin: 0 auto; /* Centro il modulo */
+    max-width: 400px; /* Larghezza massima del modulo */
+}
+
+/* Stile per i campi del modulo */
+label {
+    margin-bottom: 5px; /* Spazio sotto il label */
+}
+
+input,
+select {
+    padding: 10px;
+    margin-bottom: 15px; /* Spazio sotto i campi */
+    border: 1px solid #c6b7a6; /* Bordo marroncino chiaro */
+    border-radius: 5px; /* Bordo arrotondato */
+}
+
+button {
+    background-color: #8b5a2b; /* Colore marrone scuro per il bottone */
+    color: white; /* Colore del testo del bottone */
+    padding: 10px;
+    border: none;
+    border-radius: 5px; /* Bordo arrotondato per il bottone */
+    cursor: pointer; /* Puntatore a mano sul bottone */
+}
+
+button:hover {
+    background-color: #733c1e; /* Colore quando il mouse passa sopra il bottone */
+}
+
+
+.titolo-azienda {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.menu-cont {
+    flex-grow: 1; /* permette di allargare il menu fino all'asse x */
+    margin: 0 auto;
+    width: fit-content;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-right: 20px;
+}
+
+.header-cont {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo-cont {
+    margin-left: 20px;
+}
+
+.testo-cont {
+    text-align: center;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.claim-azienda{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#username {
+    font-size: 24px;
+    font-weight: bold; 
+}
