@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     if (pullmanForm) {
         // Recupero dati luoghi partenza pullman
-            let luoghiPartenzaPullman = await fetch('./json/luogopartenza.json')  //Effettuo una chiamata di tipo GET sul database per recuperare dati dei luoghi di partenza pullman
+            let luoghiPartenzaPullman = await fetch('http://127.0.0.1:8000/pullman/lista_citta')  //Effettuo una chiamata di tipo GET sul database per recuperare dati dei luoghi di partenza pullman
         luoghiPartenzaPullman = await luoghiPartenzaPullman.json()
         for (
             let luogo of luoghiPartenzaPullman
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         }
         // Recupero dati luoghi arrivo pullman
-        let luoghiArrivoPullman = await fetch('./json/luogopartenza.json') 
+        let luoghiArrivoPullman = await fetch('http://127.0.0.1:8000/pullman/lista_citta') 
         luoghiArrivoPullman = await luoghiArrivoPullman.json()
         for (
             let luogo of luoghiArrivoPullman
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     // SUBMIT MODULO TRENI
     if (treniForm) {
         // Recupero dati luoghi partenza treni
-        let luoghiPartenzaTreni = await fetch('./json/luogopartenza.json')  
+        let luoghiPartenzaTreni = await fetch('http://127.0.0.1:8000/pullman/lista_citta')  
         luoghiPartenzaTreni = await luoghiPartenzaTreni.json()
         for (
             let luogo of luoghiPartenzaTreni
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         }
         // Recupero dati luoghi arrivo treni
-        let luoghiArrivoTreni = await fetch('./json/luogopartenza.json')  
+        let luoghiArrivoTreni = await fetch('http://127.0.0.1:8000/pullman/lista_citta')  
         luoghiArrivoTreni = await luoghiArrivoTreni.json()
         for (
             let luogo of luoghiArrivoTreni
@@ -331,35 +331,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // SCRIPT SIGNUP
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById('bottonesignup').addEventListener('click', async (event) => {
-        event.preventDefault(); // Previeni il comportamento di submit predefinito del form
-
-        const emailForm = document.getElementById('emailnew').value; // Ottieni il valore dell'input email
-        let emailExists = false; // Variabile booleana inizializzata a false
-
-        try {
-            // Fetch sul file login.json
-            const response = await fetch('../json/login.json');
-            const data = await response.json(); // Aggiorna variabile con await
-
-            // Controlla ogni oggetto nell'array
-            for (const user of data) {
-                if (emailForm === user.email) { // Confronto rigoroso
-                    emailExists = true; // Cambia il valore della variabile booleana a true
-                    break; // Esci dal ciclo
+    let btnsignup = document.getElementById('bottonesignup')
+        if (btnsignup) {
+            btnsignup.addEventListener('click', async (event) => {
+                event.preventDefault(); // Previeni il comportamento di submit predefinito del form
+        
+                const emailForm = document.getElementById('emailnew').value; // Ottieni il valore dell'input email
+                let emailExists = false; // Variabile booleana inizializzata a false
+        
+                try {
+                    // Fetch sul file login.json
+                    const response = await fetch('../json/login.json');
+                    const data = await response.json(); // Aggiorna variabile con await
+        
+                    // Controlla ogni oggetto nell'array
+                    for (const user of data) {
+                        if (emailForm === user.email) { // Confronto rigoroso
+                            emailExists = true; // Cambia il valore della variabile booleana a true
+                            break; // Esci dal ciclo
+                        }
+                    }
+        
+                    // Se l'email esiste, mostra un alert
+                    if (emailExists) {
+                        alert('Questa email è già registrata.');
+                    } else {
+                        alert('Registrazione completata con successo!'); // Puoi eseguire altre azioni qui come inviare il form
+                    }
+                    
+        
+                } catch (error) {
+                    console.error('Errore durante il fetch:', error);
                 }
-            }
-
-            // Se l'email esiste, mostra un alert
-            if (emailExists) {
-                alert('Questa email è già registrata.');
-            } else {
-                alert('Registrazione completata con successo!'); // Puoi eseguire altre azioni qui come inviare il form
-            }
-            
-
-        } catch (error) {
-            console.error('Errore durante il fetch:', error);
+            });  
         }
-    });
 });

@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prenotazione Biglietti Pullman</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'pullman/Index.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Prenota il tuo viaggio in pullman</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="">Prenotazioni</a></li>
+                <li><a href="{% url 'contattaci' %}">Contatti</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <h2>Benvenuto!</h2>
+            <p>Con la nostra piattaforma puoi prenotare biglietti per i pullman in modo semplice e veloce.</p>
+        </section>
+
+        <section id="prenotazioni">
+            <h2>Prenota ora</h2>
+            <form action="{% url 'tratta_view' %}" method="POST">
+                {% csrf_token %}
+                <label for="partenza">Luogo di partenza:</label>
+                <select id="partenza" name="partenza" required>
+                    <option value="" disabled selected>Seleziona una città...</option>
+                    {% for nome_citta in citta %}
+                    <option value="{{ nome_citta.citta }}">{{ nome_citta.citta }}</option>                  
+                    {% endfor %}
+                </select>
+
+                <label for="destinazione">Destinazione:</label>
+                <select id="destinazione" name="destinazione" required>
+                    <option value="" disabled selected>Seleziona una città...</option>
+                    {% for nome_citta in citta %}
+                    <option value="{{ nome_citta.citta }}">{{ nome_citta.citta }}</option>                  
+                    {% endfor %}
+                </select>
+
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data" required>
+
+                <label for="orario">Orario:</label>
+                <input type="time" id="orario" name="orario" required>
+
+                <label for="posti">Numero di posti:</label>
+                <input type="number" id="posti" name="posti" min="1" max="50" required>
+
+                <button type="submit">Vedi tratte</button>
+                
+            </form>
+        </section>
+
+        <section id="contatti">
+            <h2>Contattaci</h2>
+            <p>Email: supporto@prenotapullman.it</p>
+            <p>Telefono: +39 0123 456789</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 PrenotaPullman. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script>
+        // Verifica il funzionamento del menu a tendina
+        document.getElementById('partenza').addEventListener('change', function() {
+            console.log('Partenza selezionata:', this.value);
+        });
+
+        document.getElementById('destinazione').addEventListener('change', function() {
+            console.log('Destinazione selezionata:', this.value);
+        });
+    </script>
+    
+     
+   
+</body>
+</html>
