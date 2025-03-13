@@ -1,9 +1,19 @@
 [
     {
-        "id": 1,
+        "id": 4,
         "partenza": "San Severo",
         "arrivo": "Foggia",
-        "dataora": "27/02/2025, 17:00",
+        "data": "27/02/2025",
+        "ora": "17:00",
+        "prezzo": "2,50"
+    },
+    
+    {
+        "id": 7,
+        "partenza": "San Severo",
+        "arrivo": "Foggia",
+        "data": "27/02/2025",
+        "ora": "17:00",
         "prezzo": "2,50"
     },
     
@@ -11,23 +21,17 @@
         "id": 2,
         "partenza": "San Severo",
         "arrivo": "Foggia",
-        "dataora": "25/02/2025, 15:00",
+        "data": "27/02/2025",
+        "ora": "17:00",
         "prezzo": "2,50"
     },
     
     {
-        "id": 3,
+        "id": 6,
         "partenza": "San Severo",
         "arrivo": "Foggia",
-        "dataora": "15/02/2025, 20:00",
-        "prezzo": "2,50"
-    },
-    
-    {
-        "id": 4,
-        "partenza": "San Severo",
-        "arrivo": "Foggia",
-        "dataora": "12/02/2025, 18:00",
+        "data": "27/02/2025",
+        "ora": "17:00",
         "prezzo": "2,50"
     }
 ]

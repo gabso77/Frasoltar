@@ -147,6 +147,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         data.append('partenza', query.get('partenza'))
         data.append('arrivo', query.get('arrivo'))
         data.append('data', query.get('data'))
+        data.append('ora', query.get('ora'))
         let datiricercap = await fetch("http://127.0.0.1:8000/pullman/lista_tratte", {
             method: 'POST',
             body: data
@@ -162,11 +163,13 @@ document.addEventListener('DOMContentLoaded', async function() {
             let tdP = document.createElement("td")
             let tdA = document.createElement("td")
             let tdData = document.createElement("td")
+            let tdOra = document.createElement("td")
             let tdPrezzo = document.createElement("td")
             let tdButton = document.createElement("td")
             tdP.innerHTML = datitempo.partenza
             tdA.innerHTML = datitempo.arrivo
             tdData.innerHTML = query.get('data')
+            tdOra.innerHTML = query.get('ora')
             tdPrezzo.innerHTML = "€ " + datitempo.prezzo
             btn.innerHTML = "Acquista"
             btn.value = datitempo.id
@@ -175,6 +178,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             tr.appendChild(tdP)
             tr.appendChild(tdA)
             tr.appendChild(tdData)
+            tr.appendChild(tdOra)
             tr.appendChild(tdPrezzo)
             tr.appendChild(tdButton)
             tableprenotap.appendChild(tr)
@@ -218,11 +222,13 @@ document.addEventListener('DOMContentLoaded', async function() {
             let tdP = document.createElement("td")
             let tdA = document.createElement("td")
             let tdData = document.createElement("td")
+            let tdOra = document.createElement("td")
             let tdPrezzo = document.createElement("td")
             let tdButton = document.createElement("td")
             tdP.innerHTML = datitempo.partenza
             tdA.innerHTML = datitempo.arrivo
-            tdData.innerHTML = datitempo.dataora
+            tdData.innerHTML = query.get('data')
+            tdOra.innerHTML = query.get('ora')
             tdPrezzo.innerHTML = "€ " + datitempo.prezzo
             btn.innerHTML = "Acquista"
             btn.value = datitempo.id
@@ -231,6 +237,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             tr.appendChild(tdP)
             tr.appendChild(tdA)
             tr.appendChild(tdData)
+            tr.appendChild(tdOra)
             tr.appendChild(tdPrezzo)
             tr.appendChild(tdButton)
             tableprenotat.appendChild(tr)
