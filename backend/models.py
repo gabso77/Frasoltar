@@ -6,13 +6,13 @@ from django.db import models
 
 class Tratta(models.Model):
     partenza = models.CharField(max_length=20)
-    destinazione = models.CharField(max_length=20)
+    arrivo = models.CharField(max_length=20)
     tipo_corsa = models.CharField(max_length=20)
     ora = models.TimeField(default = '00:00')
     prezzo = models.FloatField()
 
     def __str__(self):
-      return self.partenza+'-'+self.destinazione
+      return self.partenza+'-'+self.arrivo
 
 
 class Citta(models.Model):

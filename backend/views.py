@@ -7,6 +7,7 @@ from zoneinfo import ZoneInfo
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def pullman(request):
     citta = Citta.objects.all()
@@ -81,3 +82,18 @@ def lista_citta(request):
     # safe=False permette di ritornare una lista (non solo un dizionario)
     return JsonResponse(citta, safe=False, )
 
+@csrf_exempt
+def lista_tratte(request):
+    if request.method == 'POST':
+        partenza = request.POST.get('partenza')
+        arrivo = request.POST.get('arrivo')
+        data = request.POST.get('data')
+        try:
+            tratta = Tratta.objects.filter(partenza=partenza, arrivo=arrivo).order_by('ora')#, ora=orario
+            tratta_lista = list(tratta.values())
+            return JsonResponse(tratta_lista, safe = False)
+
+        except Tratta.DoesNotExist:
+            return HttpResponse("La tratta richiesta non esiste.")
+    
+    # return render(request, 'pullman/Index.html')

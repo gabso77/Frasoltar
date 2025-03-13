@@ -142,13 +142,20 @@ document.addEventListener('DOMContentLoaded', async function() {
     //risultatipullman.html
     let tableprenotap = document.getElementById("tablep")
     if(tableprenotap) {
-        let datiricercap = await fetch("../json/datiricercap.json")
+        let query = new URLSearchParams(window.location.search)
+        let data = new FormData()
+        data.append('partenza', query.get('partenza'))
+        data.append('arrivo', query.get('arrivo'))
+        data.append('data', query.get('data'))
+        let datiricercap = await fetch("http://127.0.0.1:8000/pullman/lista_tratte", {
+            method: 'POST',
+            body: data
+        })
         datiricercap = await datiricercap.json()
         tableprenotap = tableprenotap.getElementsByTagName("tbody")
         tableprenotap = tableprenotap[0]
-        for ( 
-            let datitempo of datiricercap
-        ){
+        for ( let datitempo of datiricercap ) {
+            console.log(datitempo)
             // Creazione riga e dati
             let btn = document.createElement("button")
             let tr = document.createElement("tr")
@@ -159,7 +166,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             let tdButton = document.createElement("td")
             tdP.innerHTML = datitempo.partenza
             tdA.innerHTML = datitempo.arrivo
-            tdData.innerHTML = datitempo.dataora
+            tdData.innerHTML = query.get('data')
             tdPrezzo.innerHTML = "€ " + datitempo.prezzo
             btn.innerHTML = "Acquista"
             btn.value = datitempo.id
@@ -198,7 +205,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     //risultatitreni.html
     let tableprenotat = document.getElementById("tablet")
     if(tableprenotat) {
-        let datiricercat = await fetch("../json/datiricercap.json")
+        let datiricercat = await fetch("http://127.0.0.1:8000/pullman/lista_tratte")
         datiricercat = await datiricercat.json()
         tableprenotat = tableprenotat.getElementsByTagName("tbody")
         tableprenotat = tableprenotat[0]
