@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 
 
-    //RICERCA DATI PULLMAN
+    // RICERCA DATI PULLMAN
     //risultatipullman.html
     let tableprenotap = document.getElementById("tablep")
     if(tableprenotap) {
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 
 
-    //RICERCA DATI TRENI
+    // RICERCA DATI TRENI
     //risultatitreni.html
     let tableprenotat = document.getElementById("tablet")
     if(tableprenotat) {
@@ -266,6 +266,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         })
     }
 });
+
 
 // REDIRECT ACQUISTO
 function redirectToPage() {
@@ -365,4 +366,32 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });  
         }
+});
+
+
+
+
+// DARK MODE
+// Recupera la modalità dall'archivio locale
+function loadTheme() {
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+}
+
+// Alterna le modalità
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+    const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    localStorage.setItem('theme', currentTheme);
+}
+
+// Esegui il caricamento della modalità all'avvio
+document.addEventListener('DOMContentLoaded', () => {
+    loadTheme();
+    
+    // Imposta il listener per il bottone
+    const toggleButton = document.getElementById('toggleButton');
+    toggleButton.addEventListener('click', toggleTheme);
 });

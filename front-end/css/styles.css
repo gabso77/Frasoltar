@@ -149,3 +149,37 @@ button:hover {
     font-size: 24px;
     font-weight: bold; 
 }
+
+/* Stili per la modalità scura */
+.dark-mode {
+    background-color: #333; /* Colore scuro per il background */
+    color: #fff; /* Colore chiaro per il testo */
+}
+
+.dark-mode .container {
+    background-color: #574a40; /* Contenitore scuro */
+}
+.dark-mode button {
+    background-color: #e7dcd4; /* Colore del bottone in modalità scura */
+}
+
+/* Stili per la modalità scura per l'header */
+.dark-mode header {
+    background-color: #444; /* Colore scuro per l'intestazione in modalità scura */
+}
+
+.dark-mode nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #e7dcd4; /* Colore del testo per i link */
+    font-weight: bold;
+}
+
+.dark-mode button {
+    background-color: #e6d4c9; /* Colore marrone scuro per il bottone */
+    color: rgb(0, 0, 0); /* Colore del testo del bottone */
+    padding: 10px;
+    border: none;
+    border-radius: 5px; /* Bordo arrotondato per il bottone */
+    cursor: pointer; /* Puntatore a mano sul bottone */
+}
