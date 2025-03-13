@@ -332,40 +332,76 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // SCRIPT SIGNUP
 document.addEventListener("DOMContentLoaded", () => {
-    let btnsignup = document.getElementById('bottonesignup')
-        if (btnsignup) {
-            btnsignup.addEventListener('click', async (event) => {
-                event.preventDefault(); // Previeni il comportamento di submit predefinito del form
-        
-                const emailForm = document.getElementById('emailnew').value; // Ottieni il valore dell'input email
-                let emailExists = false; // Variabile booleana inizializzata a false
-        
-                try {
-                    // Fetch sul file login.json
-                    const response = await fetch('../json/login.json');
-                    const data = await response.json(); // Aggiorna variabile con await
-        
-                    // Controlla ogni oggetto nell'array
-                    for (const user of data) {
-                        if (emailForm === user.email) { // Confronto rigoroso
-                            emailExists = true; // Cambia il valore della variabile booleana a true
-                            break; // Esci dal ciclo
-                        }
+    let btnsignup = document.getElementById('bottonesignup');
+    if (btnsignup) {
+        btnsignup.addEventListener('click', async (event) => {
+            event.preventDefault(); // Impedisce il comportamento predefinito dell'invio del modulo
+
+            const emailForm = document.getElementById('emailnew').value.trim(); // Ottiene il valore dell'input email e lo rimuove dagli spazi
+            const usernameForm = document.getElementById('usernamenew').value.trim(); // Ottiene il valore dell'input username
+            const nomeForm = document.getElementById('nome').value.trim(); // Ottiene il valore dell'input nome
+            const cognomeForm = document.getElementById('cognome').value.trim(); // Ottiene il valore dell'input cognome
+            const passwordForm = document.getElementById('password').value.trim(); // Ottiene il valore dell'input password
+            const telefonoForm = document.getElementById('telefono').value.trim(); // Ottiene il valore dell'input telefono
+            
+            let emailExists = false; // Variabile booleana inizializzata a false
+
+            // Valida gli input
+            if (!emailForm || !emailForm.includes('@')) {
+                alert('Per favore, inserisci un\'email valida.');
+                return; // Esci dalla funzione se l'email è vuota o non valida
+            }
+
+            if (!usernameForm) {
+                alert('Per favore, inserisci un username.');
+                return; // Esci se lo username è vuoto
+            }
+
+            if (!nomeForm) {
+                alert('Per favore, inserisci il tuo nome.');
+                return; // Esci se il nome è vuoto
+            }
+
+            if (!cognomeForm) {
+                alert('Per favore, inserisci il tuo cognome.');
+                return; // Esci se il cognome è vuoto
+            }
+
+            if (!passwordForm) {
+                alert('Per favore, inserisci una password.');
+                return; // Esci se la password è vuota
+            }
+
+            if (!telefonoForm || telefonoForm.length !== 10 || !/^\d+$/.test(telefonoForm)) {
+                alert('Per favore, inserisci un numero di telefono valido di 10 cifre.');
+                return; // Esci se il telefono è vuoto o non è un numero valido di 10 cifre
+            }
+
+            try {
+                // Ottiene il file login.json
+                const response = await fetch('../json/login.json');
+                const data = await response.json(); // Aggiorna la variabile con await
+
+                // Controlla ogni oggetto nell'array
+                for (const user of data) {
+                    if (emailForm === user.email) { // Confronto stretto
+                        emailExists = true; // Imposta la variabile booleana su true
+                        break; // Esci dal ciclo
                     }
-        
-                    // Se l'email esiste, mostra un alert
-                    if (emailExists) {
-                        alert('Questa email è già registrata.');
-                    } else {
-                        alert('Registrazione completata con successo!'); // Puoi eseguire altre azioni qui come inviare il form
-                    }
-                    
-        
-                } catch (error) {
-                    console.error('Errore durante il fetch:', error);
                 }
-            });  
-        }
+
+                // Se l'email esiste, mostra un avviso
+                if (emailExists) {
+                    alert('Questa email è già registrata.');
+                } else {
+                    alert('Registrazione completata con successo!'); // Puoi eseguire altre azioni qui, come inviare il modulo
+                }
+
+            } catch (error) {
+                console.error('Errore durante il fetch:', error);
+            }
+        });  
+    }
 });
 
 
