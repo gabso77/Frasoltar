@@ -1,6 +1,12 @@
 /* Impostazioni di base */
 body {
-    font-family: 'Franklin Gothic Medium';
+    font-family: "Nunito Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
     margin: 0; /* Rimuove margini di default */
     padding: 0; /* Rimuove padding di default */
     background-color: #f5f5dc; /* Colore di sfondo generale della pagina */
@@ -21,17 +27,14 @@ main {
     display: flex;
     flex-direction: column;
     align-items: stretch;
- 
     height: auto;
     max-width: 100%;
     margin: 0;
- 
-
     /* Regole per le immagini, spostate qui */
-    img{
-       max-width: 100%;
+    img {
+        max-width: 100%;
         height: 100%;
-       object-fit: fill;
+        object-fit: fill;
     }
 }
 
@@ -107,6 +110,13 @@ button:hover {
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-family: "Nunito Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
 }
 
 .menu-cont {
@@ -143,6 +153,13 @@ button:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-family: "Nunito Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
 }
 
 #username {
