@@ -75,9 +75,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             const partenza = document.getElementById('luogo-partenza-pullman').value;
             const arrivo = document.getElementById('luogo-arrivo-pullman').value;
             const data = document.getElementById('data-pullman').value;
+            const ora = document.getElementById('ora-pullman').value;
             
             // Creare l'URL per i risultati dei pullman
-            const url = `./pages/risultatipullman.html?partenza=${encodeURIComponent(partenza)}&arrivo=${encodeURIComponent(arrivo)}&data=${encodeURIComponent(data)}`;
+            const url = `./pages/risultatipullman.html?partenza=${encodeURIComponent(partenza)}&arrivo=${encodeURIComponent(arrivo)}&data=${encodeURIComponent(data)}&ora=${encodeURIComponent(ora)}`;
             window.location.href = url; // Reindirizza
         });
     }
@@ -127,9 +128,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             const partenza = document.getElementById('luogo-partenza-treni').value;
             const arrivo = document.getElementById('luogo-arrivo-treni').value;
             const data = document.getElementById('data-treni').value;
+            const ora = document.getElementById('ora-treni').value;
             
             // Creare l'URL per i risultati dei treni
-            const url = `./pages/risultatitreni.html?partenza=${encodeURIComponent(partenza)}&arrivo=${encodeURIComponent(arrivo)}&data=${encodeURIComponent(data)}`;
+            const url = `./pages/risultatitreni.html?partenza=${encodeURIComponent(partenza)}&arrivo=${encodeURIComponent(arrivo)}&data=${encodeURIComponent(data)}&ora=${encodeURIComponent(ora)}`;
             window.location.href = url; // Reindirizza
         });
     }
@@ -164,12 +166,14 @@ document.addEventListener('DOMContentLoaded', async function() {
             let tdA = document.createElement("td")
             let tdData = document.createElement("td")
             let tdOra = document.createElement("td")
+            let tdTipoCorsa = document.createElement("td")
             let tdPrezzo = document.createElement("td")
             let tdButton = document.createElement("td")
             tdP.innerHTML = datitempo.partenza
             tdA.innerHTML = datitempo.arrivo
             tdData.innerHTML = query.get('data')
-            tdOra.innerHTML = query.get('ora')
+            tdOra.innerHTML = datitempo.ora
+            tdTipoCorsa.innerHTML = datitempo.tipo_corsa
             tdPrezzo.innerHTML = "€ " + datitempo.prezzo
             btn.innerHTML = "Acquista"
             btn.value = datitempo.id
@@ -179,6 +183,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             tr.appendChild(tdA)
             tr.appendChild(tdData)
             tr.appendChild(tdOra)
+            tr.appendChild(tdTipoCorsa)
             tr.appendChild(tdPrezzo)
             tr.appendChild(tdButton)
             tableprenotap.appendChild(tr)
@@ -209,13 +214,21 @@ document.addEventListener('DOMContentLoaded', async function() {
     //risultatitreni.html
     let tableprenotat = document.getElementById("tablet")
     if(tableprenotat) {
-        let datiricercat = await fetch("http://127.0.0.1:8000/pullman/lista_tratte")
+        let query = new URLSearchParams(window.location.search)
+        let data = new FormData()
+        data.append('partenza', query.get('partenza'))
+        data.append('arrivo', query.get('arrivo'))
+        data.append('data', query.get('data'))
+        data.append('ora', query.get('ora'))
+        let datiricercat = await fetch("http://127.0.0.1:8000/pullman/lista_tratte", {
+            method: 'POST',
+            body: data
+        })
         datiricercat = await datiricercat.json()
         tableprenotat = tableprenotat.getElementsByTagName("tbody")
         tableprenotat = tableprenotat[0]
-        for ( 
-            let datitempo of datiricercat
-        ){
+        for ( let datitempo of datiricercat ) {
+            console.log(datitempo)
             // Creazione riga e dati
             let btn = document.createElement("button")
             let tr = document.createElement("tr")
@@ -223,12 +236,14 @@ document.addEventListener('DOMContentLoaded', async function() {
             let tdA = document.createElement("td")
             let tdData = document.createElement("td")
             let tdOra = document.createElement("td")
+            let tdTipoCorsa = document.createElement("td")
             let tdPrezzo = document.createElement("td")
             let tdButton = document.createElement("td")
             tdP.innerHTML = datitempo.partenza
             tdA.innerHTML = datitempo.arrivo
             tdData.innerHTML = query.get('data')
-            tdOra.innerHTML = query.get('ora')
+            tdOra.innerHTML = datitempo.ora
+            tdTipoCorsa.innerHTML = datitempo.tipo_corsa
             tdPrezzo.innerHTML = "€ " + datitempo.prezzo
             btn.innerHTML = "Acquista"
             btn.value = datitempo.id
@@ -238,12 +253,13 @@ document.addEventListener('DOMContentLoaded', async function() {
             tr.appendChild(tdA)
             tr.appendChild(tdData)
             tr.appendChild(tdOra)
+            tr.appendChild(tdTipoCorsa)
             tr.appendChild(tdPrezzo)
             tr.appendChild(tdButton)
             tableprenotat.appendChild(tr)
             // Redirect conferma
             btn.addEventListener("click", function() {
-                window.location.href = '../pages/conferma.html?riga='+ btn.value;
+            window.location.href = '../pages/conferma.html?riga='+ btn.value;
             });
         } 
         // Testo errore
