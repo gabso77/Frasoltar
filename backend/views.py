@@ -87,9 +87,12 @@ def lista_tratte(request):
     if request.method == 'POST':
         partenza = request.POST.get('partenza')
         arrivo = request.POST.get('arrivo')
-        data = request.POST.get('data')
+        ora = request.POST.get('ora')
+
+        orario_richiesto = datetime.strptime(ora, "%H:%M").time()
+        
         try:
-            tratta = Tratta.objects.filter(partenza=partenza, arrivo=arrivo).order_by('ora')#, ora=orario
+            tratta = Tratta.objects.filter(partenza=partenza, arrivo=arrivo, ora__gte=orario_richiesto).order_by('ora')#, ora=orario
             tratta_lista = list(tratta.values())
             return JsonResponse(tratta_lista, safe = False)
 

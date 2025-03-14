@@ -75,9 +75,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             const partenza = document.getElementById('luogo-partenza-pullman').value;
             const arrivo = document.getElementById('luogo-arrivo-pullman').value;
             const data = document.getElementById('data-pullman').value;
+            const ora = document.getElementById('ora-pullman').value;
             
             // Creare l'URL per i risultati dei pullman
-            const url = `./pages/risultatipullman.html?partenza=${encodeURIComponent(partenza)}&arrivo=${encodeURIComponent(arrivo)}&data=${encodeURIComponent(data)}`;
+            const url = `./pages/risultatipullman.html?partenza=${encodeURIComponent(partenza)}&arrivo=${encodeURIComponent(arrivo)}&data=${encodeURIComponent(data)}&ora=${encodeURIComponent(ora)}`;
             window.location.href = url; // Reindirizza
         });
     }
@@ -164,12 +165,14 @@ document.addEventListener('DOMContentLoaded', async function() {
             let tdA = document.createElement("td")
             let tdData = document.createElement("td")
             let tdOra = document.createElement("td")
+            let tdTipoCorsa = document.createElement("td")
             let tdPrezzo = document.createElement("td")
             let tdButton = document.createElement("td")
             tdP.innerHTML = datitempo.partenza
             tdA.innerHTML = datitempo.arrivo
             tdData.innerHTML = query.get('data')
-            tdOra.innerHTML = query.get('ora')
+            tdOra.innerHTML = datitempo.ora
+            tdTipoCorsa.innerHTML = datitempo.tipo_corsa
             tdPrezzo.innerHTML = "€ " + datitempo.prezzo
             btn.innerHTML = "Acquista"
             btn.value = datitempo.id
@@ -179,6 +182,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             tr.appendChild(tdA)
             tr.appendChild(tdData)
             tr.appendChild(tdOra)
+            tr.appendChild(tdTipoCorsa)
             tr.appendChild(tdPrezzo)
             tr.appendChild(tdButton)
             tableprenotap.appendChild(tr)
