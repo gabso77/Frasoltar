@@ -82,6 +82,7 @@ WSGI_APPLICATION = 'webapppullman.wsgi.application'
 
 import mysql.connector
 
+#Marco
 DATABASES = {
     'default': {
         'ENGINE': 'mysql.connector.django',
@@ -90,9 +91,18 @@ DATABASES = {
         'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
-        'OPTIONS': {
-            'unix_socket': '/Applications/MAMP/tmp/mysql/mysql.sock',
-        },
+    }
+}
+
+#Gabriele
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Prenotazioni_pullman',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 

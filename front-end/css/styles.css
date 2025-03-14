@@ -22,22 +22,6 @@ main {
     margin: 0; /* Assicura che non ci siano margini */
 }
 
-.container-pullman {
-    /* Regole esistenti per .container-pullman */
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    height: auto;
-    max-width: 100%;
-    margin: 0;
-    /* Regole per le immagini, spostate qui */
-    img {
-        max-width: 100%;
-        height: 100%;
-        object-fit: fill;
-    }
-}
-
 
 /* Stile per il contenitore principale */
 .container {
@@ -47,6 +31,7 @@ main {
     padding: 40px;
     min-width: 600px;
     white-space: nowrap;
+    background-image: url('../img/sfondo.jpg');
 }
 /* Header e menu */
 header {
