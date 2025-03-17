@@ -1,37 +1,40 @@
 [
-    {
-        "id": 4,
+    {    
         "partenza": "San Severo",
         "arrivo": "Foggia",
         "data": "27/02/2025",
         "ora": "17:00",
+        "tipo_corsa": "Treno",
         "prezzo": "2,50"
     },
     
     {
-        "id": 7,
+        
         "partenza": "San Severo",
         "arrivo": "Foggia",
         "data": "27/02/2025",
         "ora": "17:00",
+        "tipo_corsa": "Treno",
         "prezzo": "2,50"
     },
     
     {
-        "id": 2,
+
         "partenza": "San Severo",
         "arrivo": "Foggia",
         "data": "27/02/2025",
         "ora": "17:00",
+        "tipo_corsa": "Treno",
         "prezzo": "2,50"
     },
     
     {
-        "id": 6,
+
         "partenza": "San Severo",
         "arrivo": "Foggia",
         "data": "27/02/2025",
         "ora": "17:00",
+        "tipo_corsa": "Treno",
         "prezzo": "2,50"
     }
 ]

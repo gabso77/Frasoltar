@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             tdTipoCorsa.innerHTML = datitempo.tipo_corsa
             tdPrezzo.innerHTML = "€ " + datitempo.prezzo
             btn.innerHTML = "Acquista"
-            btn.value = datitempo.id
+            btn.value = datitempo.partenza + datitempo.arrivo + datitempo.ora + datitempo.tipo_corsa + datitempo.prezzo + query.get('data')
             tdButton.appendChild(btn)
             // Import dati su schermo
             tr.appendChild(tdP)
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             tableprenotap.appendChild(tr)
             // Redirect conferma
             btn.addEventListener("click", function() {
-            window.location.href = '../pages/conferma.html?riga='+ btn.value;
+            window.location.href = '../pages/conferma.html?'+ btn.value;
             });
         } 
         // Testo errore
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             tdTipoCorsa.innerHTML = datitempo.tipo_corsa
             tdPrezzo.innerHTML = "€ " + datitempo.prezzo
             btn.innerHTML = "Acquista"
-            btn.value = datitempo.id
+            btn.value = datitempo.partenza + datitempo.arrivo + query.get('data') + datitempo.ora + datitempo.tipo_corsa + datitempo.prezzo
             tdButton.appendChild(btn)
             // Import dati su schermo
             tr.appendChild(tdP)
@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             tableprenotat.appendChild(tr)
             // Redirect conferma
             btn.addEventListener("click", function() {
-            window.location.href = '../pages/conferma.html?riga='+ btn.value;
+            window.location.href = '../pages/conferma.html?partenza='+ btn.value;
             });
         } 
         // Testo errore
@@ -277,21 +277,27 @@ document.addEventListener('DOMContentLoaded', async function() {
     let datiriga = document.getElementById("datirigascelta")
     if (datiriga)
     {
-        fetch("../json/datiricercap.json").then(async function(righedati) {
+        fetch("http://127.0.0.1:8000/pullman/lista_tratte").then(async function(righedati) {
             righedati = await righedati.json()
-            let query = window.location.search
-            let idriga = new URLSearchParams(query)
-            idriga = idriga.get("riga")
-            let oggettorigacercata = {} // Questa variabile conterrà l'oggetto cercato grazie al codice sotto
+            let query = window.location.search // Questa riga prende tutto ciò che è scritto nella barra dell'indirizzo web
+            let parametriURL = new URLSearchParams(query)
+            let idPartenza = parametriURL.get("partenza")
+            let idArrivo = parametriURL.get("arrivo")
+            let idData = parametriURL.get("data")
+            let idOra = parametriURL.get("ora")
+            let idTCorsa = parametriURL.get("tipo_corsa")
+            let idPrezzo = parametriURL.get("prezzo")
+            let oggettoRigaCercata = {} // Questa variabile conterrà l'oggetto cercato grazie al codice sotto
             for (let datitemporiga of righedati) { // Cicliamo ogni oggetto presente nell'array
-                if (datitemporiga.id == idriga) { 
-                    oggettorigacercata = datitemporiga // Sovrascriviamo l'oggetto vuoto con l'oggetto che contiene l'id cercato
+                if (datitemporiga.idPartenza == idPartenza) { 
+                    oggettoRigaCercata = datitemporiga // Sovrascriviamo l'oggetto vuoto con l'oggetto che contiene l'id cercato
                 }
             }
             datiriga.innerHTML = `
-            <p>${oggettorigacercata.partenza}-${oggettorigacercata.arrivo}<br>
-            ${oggettorigacercata.dataora}<br>
-            ${oggettorigacercata.prezzo}</p>
+            <p>Tratta: ${oggettoRigaCercata.partenza} - ${oggettoRigaCercata.arrivo}<br>
+            Data: ${oggettoRigaCercata.data}<br>
+            ${'Ora: '+ oggettoRigaCercata.ora}<br>
+            ${'Totale: € '+ oggettoRigaCercata.prezzo}</p>
             `
         })
     }
