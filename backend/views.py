@@ -26,7 +26,7 @@ def tratte(request):
 def tratta_view(request):
     if request.method == 'POST':
         partenza = request.POST.get('partenza')
-        destinazione = request.POST.get('destinazione')
+        arrivo = request.POST.get('destinazione')
         data = request.POST.get('data')
         orario = request.POST.get('orario')
         posti = request.POST.get('posti')
@@ -35,7 +35,7 @@ def tratta_view(request):
 
         # Cerca nel database una tratta che corrisponde ai dati forniti
         try:
-            tratta = Tratta.objects.filter(partenza=partenza, destinazione=destinazione, ora__gte=orario_richiesto).order_by('ora')#, ora=orario
+            tratta = Tratta.objects.filter(partenza=partenza, destinazione=arrivo, ora__gte=orario_richiesto).order_by('ora')#, ora=orario
             return render(request, 'pullman/tratte.html', {'tratte': tratta, 'data': data})
     #         # Controlla se ci sono posti sufficienti
     #         if int(posti) <= 50:  # Qui puoi aggiungere una logica per gestire i posti rimanenti
@@ -100,3 +100,21 @@ def lista_tratte(request):
             return HttpResponse("La tratta richiesta non esiste.")
     
     # return render(request, 'pullman/Index.html')
+        
+
+def conferma_Prenotazione(request):
+    tratta_id = request.POST.get('id')
+    tratta = get_object_or_404(Tratta, id=tratta_id)
+    data = request.POST.get('data')  # Recupera la data dalla sessione
+    
+    if request.method == 'POST':
+        # Creazione della prenotazione
+        prenotazione = Prenotazione.objects.create(tratta=tratta, data=data)
+        
+        # Salva la prenotazione e mostra un messaggio di conferma
+        prenotazione.save()
+        messages.success(request, f"Prenotazione confermata! ID Prenotazione: {prenotazione.id}")
+        
+        # return redirect('conferma_successo', prenotazione_id=prenotazione.id)  # Redireziona alla pagina di successo
+    
+    # return render(request, 'pullman/conferma_prenotazione.html', {'tratta': tratta, 'data': data})

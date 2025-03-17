@@ -157,6 +157,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         datiricercap = await datiricercap.json()
         tableprenotap = tableprenotap.getElementsByTagName("tbody")
         tableprenotap = tableprenotap[0]
+        let Data = query.get('data')
         for ( let datitempo of datiricercap ) {
             console.log(datitempo)
             // Creazione riga e dati
@@ -171,12 +172,13 @@ document.addEventListener('DOMContentLoaded', async function() {
             let tdButton = document.createElement("td")
             tdP.innerHTML = datitempo.partenza
             tdA.innerHTML = datitempo.arrivo
-            tdData.innerHTML = query.get('data')
+            tdData.innerHTML = Data
             tdOra.innerHTML = datitempo.ora
             tdTipoCorsa.innerHTML = datitempo.tipo_corsa
             tdPrezzo.innerHTML = "€ " + datitempo.prezzo
             btn.innerHTML = "Acquista"
-            btn.value = datitempo.partenza + datitempo.arrivo + datitempo.ora + datitempo.tipo_corsa + datitempo.prezzo + query.get('data')
+            // btn.value = datitempo.partenza + datitempo.arrivo + datitempo.ora + datitempo.tipo_corsa + datitempo.prezzo + query.get('data')
+            btn.value = datitempo.id
             tdButton.appendChild(btn)
             // Import dati su schermo
             tr.appendChild(tdP)
@@ -189,7 +191,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             tableprenotap.appendChild(tr)
             // Redirect conferma
             btn.addEventListener("click", function() {
-            window.location.href = '../pages/conferma.html?'+ btn.value;
+            // window.location.href = '../pages/conferma.html?'+ btn.value;
+            window.location.href = `../pages/conferma.html?id=${datitempo.id}&partenza=${datitempo.partenza}&arrivo=${datitempo.arrivo}&ora=${datitempo.ora}&tipo_corsa=${datitempo.tipo_corsa}&prezzo=${datitempo.prezzo}&data=${Data}` 
             });
         } 
         // Testo errore
@@ -274,39 +277,51 @@ document.addEventListener('DOMContentLoaded', async function() {
             tableprenotat.appendChild(trErrore)
         }
     }
+
+    //Invio Dati Tratta per mostrarli come riepilogo dopo la scelta del biglietto
     let datiriga = document.getElementById("datirigascelta")
     if (datiriga)
     {
-        fetch("http://127.0.0.1:8000/pullman/lista_tratte").then(async function(righedati) {
-            righedati = await righedati.json()
-            let query = window.location.search // Questa riga prende tutto ciò che è scritto nella barra dell'indirizzo web
-            let parametriURL = new URLSearchParams(query)
-            let idPartenza = parametriURL.get("partenza")
-            let idArrivo = parametriURL.get("arrivo")
-            let idData = parametriURL.get("data")
-            let idOra = parametriURL.get("ora")
-            let idTCorsa = parametriURL.get("tipo_corsa")
-            let idPrezzo = parametriURL.get("prezzo")
-            let oggettoRigaCercata = {} // Questa variabile conterrà l'oggetto cercato grazie al codice sotto
-            for (let datitemporiga of righedati) { // Cicliamo ogni oggetto presente nell'array
-                if (datitemporiga.idPartenza == idPartenza) { 
-                    oggettoRigaCercata = datitemporiga // Sovrascriviamo l'oggetto vuoto con l'oggetto che contiene l'id cercato
-                }
-            }
-            datiriga.innerHTML = `
-            <p>Tratta: ${oggettoRigaCercata.partenza} - ${oggettoRigaCercata.arrivo}<br>
-            Data: ${oggettoRigaCercata.data}<br>
-            ${'Ora: '+ oggettoRigaCercata.ora}<br>
-            ${'Totale: € '+ oggettoRigaCercata.prezzo}</p>
+        let query = window.location.search // Questa riga prende tutto ciò che è scritto nella barra dell'indirizzo web
+        let parametriURL = new URLSearchParams(query)
+        let partenza = parametriURL.get("partenza")
+        let arrivo = parametriURL.get("arrivo")
+        let data = parametriURL.get("data")
+        let ora = parametriURL.get("ora")
+        let tipoCorsa = parametriURL.get("tipo_corsa")
+        let prezzo = parametriURL.get("prezzo")
+        datiriga.innerHTML = `
+        <p>Tratta: ${partenza} - ${arrivo}<br>
+        Tipo Corsa: ${tipoCorsa}<br>
+        Data: ${data}<br>
+        Ora: ${ora}<br>
+        Totale: ${prezzo} €</p>
             `
-        })
     }
 });
 
 
 // REDIRECT ACQUISTO
 function redirectToPage() {
-    window.location.href = "../pages/acquistoeffettuato.html";
+    let query = window.location.search
+    let dati = new URLSearchParams(query)
+    let id = dati.get('id')
+    let data = dati.get('data')
+
+    fetch("http://127.0.0.1:8000/pullman/conferma_Prenotazione",{
+        method:'POST',
+        body:JSON.stringify({
+            id:id,
+            data:data
+        })
+        .then((response)=>{
+            console.log(response)
+        })
+        .then((dati)=>{
+            console.log(dati)
+        })
+    })
+    // window.location.href = "../pages/acquistoeffettuato.html";
 }
 
 
