@@ -386,38 +386,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// VISIBILITÀ PASSWORD
-document.getElementById('togglePassword').addEventListener('click', function() {
-    const passwordField = document.getElementById('password');
-    const icon = document.getElementById('togglePassword');
 
-    if (passwordField.type === 'password') {
-        passwordField.type = 'text';  // Mostra la password
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-    } else {
-        passwordField.type = 'password';  // Nasconde la password
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-    }
-});
-
-
-
-
-// FORMATTAZIONE NUMERO DI TELEFONO
-document.getElementById('telefono').addEventListener('input', function(event) {
-    let input = event.target.value.replace(/[^\d]/g, ''); // Rimuove tutto tranne i numeri
-
-    // Aggiungi i trattini dopo ogni terzina di numeri
-    if (input.length > 3 && input.length <= 6) {
-        input = input.replace(/(\d{3})(\d{0,3})/, '$1-$2');
-    } else if (input.length > 6) {
-        input = input.replace(/(\d{3})(\d{3})(\d{0,4})/, '$1-$2-$3');
-    }
-
-    event.target.value = input; // Imposta il valore formattato
-});
 
 
 
@@ -525,23 +494,66 @@ document.addEventListener("DOMContentLoaded", () => {
 // Recupera la modalità dall'archivio locale
 function loadTheme() {
     const currentTheme = localStorage.getItem('theme') || 'light';
+    const themeSwitch = document.getElementById('themeSwitch');
+    
     if (currentTheme === 'dark') {
         document.body.classList.add('dark-mode');
+        themeSwitch.checked = true;  // Imposta lo switch su "on"
+    } else {
+        themeSwitch.checked = false;  // Imposta lo switch su "off"
     }
 }
 
 // Alterna le modalità
 function toggleTheme() {
+    const themeSwitch = document.getElementById('themeSwitch');
     document.body.classList.toggle('dark-mode');
-    const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    const currentTheme = themeSwitch.checked ? 'dark' : 'light';
     localStorage.setItem('theme', currentTheme);
 }
 
 // Esegui il caricamento della modalità all'avvio
 document.addEventListener('DOMContentLoaded', () => {
     loadTheme();
-    
-    // Imposta il listener per il bottone
-    const toggleButton = document.getElementById('toggleButton');
-    toggleButton.addEventListener('click', toggleTheme);
+
+    // Imposta il listener per lo switch
+    const themeSwitch = document.getElementById('themeSwitch');
+    themeSwitch.addEventListener('change', toggleTheme);
+});
+
+
+
+
+
+// VISIBILITÀ PASSWORD
+document.getElementById('togglePassword').addEventListener('click', function() {
+    const passwordField = document.getElementById('password');
+    const icon = document.getElementById('togglePassword');
+
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';  // Mostra la password
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        passwordField.type = 'password';  // Nasconde la password
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+});
+
+
+
+
+// FORMATTAZIONE NUMERO DI TELEFONO
+document.getElementById('telefono').addEventListener('input', function(event) {
+    let input = event.target.value.replace(/[^\d]/g, ''); // Rimuove tutto tranne i numeri
+
+    // Aggiungi i trattini dopo ogni terzina di numeri
+    if (input.length > 3 && input.length <= 6) {
+        input = input.replace(/(\d{3})(\d{0,3})/, '$1-$2');
+    } else if (input.length > 6) {
+        input = input.replace(/(\d{3})(\d{3})(\d{0,4})/, '$1-$2-$3');
+    }
+
+    event.target.value = input; // Imposta il valore formattato
 });

@@ -14,7 +14,10 @@
         <div class="logo-cont">
             <img src="./img/newlogo.png" alt="Logo di Frasoltar" width="250" height="250" />
         </div>
-        <button id="toggleButton" class="btn">Cambia Modalità</button>
+        <label class="switch">
+            <input type="checkbox" id="themeSwitch">
+            <span class="slider"></span>
+        </label>
         <div class="testo-cont">
             <h1 class="titolo-azienda">Frasoltar</h1><br>
             <h3 class="claim-azienda">Acquista Biglietti in Provincia di Foggia</h3>
@@ -33,7 +36,7 @@
     <main>
         <div class="container">
             <section id="pullman">
-                <h2>Pullman</h2>
+                <h2>🚌 Pullman</h2>
                 <form id="pullmanForm">
                     <label for="luogo-partenza-pullman">Luogo di Partenza</label>
                     <select id="luogo-partenza-pullman" name="partenza" required>
@@ -61,7 +64,7 @@
             <br>
             <br>
             <section id="treni">
-                <h2>Treni</h2>
+                <h2>🚆 Treni</h2>
                 <form id="treniForm">
                     <label for="luogo-partenza-treni">Luogo di Partenza</label>
                     <select id="luogo-partenza-treni" name="partenza" required>
