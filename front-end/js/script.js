@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             tdTipoCorsa.innerHTML = datitempo.tipo_corsa
             tdPrezzo.innerHTML = "€ " + datitempo.prezzo
             btn.innerHTML = "Acquista"
-            btn.value = datitempo.partenza + datitempo.arrivo + query.get('data') + datitempo.ora + datitempo.tipo_corsa + datitempo.prezzo
+            btn.value = datitempo.id
             tdButton.appendChild(btn)
             // Import dati su schermo
             tr.appendChild(tdP)
@@ -262,7 +262,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             tableprenotat.appendChild(tr)
             // Redirect conferma
             btn.addEventListener("click", function() {
-            window.location.href = '../pages/conferma.html?partenza='+ btn.value;
+            // window.location.href = '../pages/conferma.html?partenza='+ btn.value;
+            window.location.href = `../pages/conferma.html?id=${datitempo.id}&partenza=${datitempo.partenza}&arrivo=${datitempo.arrivo}&ora=${datitempo.ora}&tipo_corsa=${datitempo.tipo_corsa}&prezzo=${datitempo.prezzo}&data=${Data}` 
             });
         } 
         // Testo errore
@@ -307,21 +308,22 @@ function redirectToPage() {
     let dati = new URLSearchParams(query)
     let id = dati.get('id')
     let data = dati.get('data')
-
-    fetch("http://127.0.0.1:8000/pullman/conferma_Prenotazione",{
-        method:'POST',
-        body:JSON.stringify({
-            id:id,
-            data:data
+    let formData = new FormData()
+    formData.append('id',id)
+    formData.append('data',data)
+    fetch("http://127.0.0.1:8000/pullman/conferma_Prenotazione", {
+        method: 'POST',
+          body: formData
         })
-        .then((response)=>{
-            console.log(response)
-        })
-        .then((dati)=>{
-            console.log(dati)
-        })
-    })
-    // window.location.href = "../pages/acquistoeffettuato.html";
+  .then((response)=> response.json())
+  .then((dati)=> {
+     if (dati.success == true) {
+        window.location.href = '../pages/acquistoeffettuato.html'
+     }
+     else {
+        window.location.href = '../pages/acquistoerrato.html'
+     }
+  })
 }
 
 

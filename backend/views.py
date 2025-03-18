@@ -101,8 +101,9 @@ def lista_tratte(request):
     
     # return render(request, 'pullman/Index.html')
         
-
+@csrf_exempt
 def conferma_Prenotazione(request):
+    print("Dati ricevuti:", request.POST)
     tratta_id = request.POST.get('id')
     tratta = get_object_or_404(Tratta, id=tratta_id)
     data = request.POST.get('data')  # Recupera la data dalla sessione
@@ -115,6 +116,12 @@ def conferma_Prenotazione(request):
         prenotazione.save()
         messages.success(request, f"Prenotazione confermata! ID Prenotazione: {prenotazione.id}")
         
-        # return redirect('conferma_successo', prenotazione_id=prenotazione.id)  # Redireziona alla pagina di successo
-    
-    # return render(request, 'pullman/conferma_prenotazione.html', {'tratta': tratta, 'data': data})
+       # Risposta in JSON (ad esempio un messaggio)
+        return JsonResponse({
+            'success': True,
+            'message': 'Prenotazione creata correttamente',
+            'prenotazione_id': prenotazione.id
+        })
+    else:
+        # Se arriva una GET o altro, rispondi come preferisci
+        return JsonResponse({'error': 'Metodo non supportato'}, status=400)
