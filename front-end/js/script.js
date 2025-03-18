@@ -396,11 +396,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const cognomeForm = document.getElementById('cognome').value.trim(); // Ottiene il valore dell'input cognome
             const passwordForm = document.getElementById('password').value.trim(); // Ottiene il valore dell'input password
             const telefonoForm = document.getElementById('telefono').value.trim(); // Ottiene il valore dell'input telefono
-            
+            let errorMessage = '';
+
             let emailExists = false; // Variabile booleana inizializzata a false
 
             // Valida gli input
-            if (!emailForm || !emailForm.includes('@')) {
+            if (!emailForm || !emailForm.includes('@') || emailForm.indexOf('@') === 0 || emailForm.indexOf('@') === emailForm.length - 1) {
                 alert('Per favore, inserisci un\'email valida.');
                 return; // Esci dalla funzione se l'email è vuota o non valida
             }
@@ -421,8 +422,28 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (!passwordForm) {
-                alert('Per favore, inserisci una password.');
-                return; // Esci se la password è vuota
+                errorMessage += "La password non può essere vuota.\n";
+            } 
+            if (passwordForm.length < 8) {
+                errorMessage += "La password deve essere lunga almeno 8 caratteri.\n";
+            } 
+            if (!/[A-Z]/.test(passwordForm)) {
+                errorMessage += "La password deve contenere almeno una lettera maiuscola.\n";
+            } 
+            if (!/[a-z]/.test(passwordForm)) {
+                errorMessage += "La password deve contenere almeno una lettera minuscola.\n";
+            } 
+            if (!/[0-9]/.test(passwordForm)) {
+                errorMessage += "La password deve contenere almeno un numero.\n";
+            } 
+            if (!/[^A-Za-z0-9]/.test(passwordForm)) {
+                errorMessage += "La password deve contenere almeno un carattere speciale (esempio: !, @, #, $, %, ^, &, *, (, )).\n";
+            }
+
+            // Se ci sono errori, mostriamo l'alert
+            if (errorMessage) {
+                alert(errorMessage);
+                return;  // Ferma l'esecuzione se ci sono errori
             }
 
             if (!telefonoForm || telefonoForm.length !== 10 || !/^\d+$/.test(telefonoForm)) {
