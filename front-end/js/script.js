@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         Tipo Corsa: ${tipoCorsa}<br>
         Data: ${data}<br>
         Ora: ${ora}<br>
-        Totale: ${prezzo} €</p>
+        Totale: € ${prezzo}</p>
             `
     }
 });
