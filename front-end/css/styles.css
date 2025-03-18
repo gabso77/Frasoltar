@@ -32,6 +32,7 @@ main {
     min-width: 600px;
     white-space: nowrap;
     background-image: url('../img/sfondo.jpg');
+    color: #e7dcd4;
 }
 /* Header e menu */
 header {
@@ -188,7 +189,6 @@ button:hover {
 
 
 
-
 /* Stile per lo switch */
 .switch {
     position: relative;
@@ -235,3 +235,38 @@ button:hover {
     transform: translateX(26px);
   }
   
+  form {
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    width: 100%;
+    max-width: 500px; /* Impostiamo una larghezza massima per evitare che il form sia troppo largo */
+    transition: background-color 0.3s ease;
+    word-wrap: break-word; /* Fa sì che il testo vada a capo se è troppo lungo */
+}
+body:not(.dark-mode) form {
+    background-color: white; /* Sfondo bianco per modalità chiara */
+    color: black; /* Colore del testo per modalità chiara */
+}
+
+/* Modalità scura */
+body.dark-mode form {
+    background-color: #333; /* Sfondo scuro per modalità scura */
+    color: white; /* Colore del testo per modalità scura */
+}
+
+
+  .home-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #2196F3; /* Colore di sfondo per il link */
+    color: white; /* Colore del testo */
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+.home-btn:hover {
+    background-color: #0b7dda; /* Colore più scuro per hover */
+}
