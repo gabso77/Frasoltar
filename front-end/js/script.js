@@ -383,6 +383,46 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+
+
+
+// VISIBILITÀ PASSWORD
+document.getElementById('togglePassword').addEventListener('click', function() {
+    const passwordField = document.getElementById('password');
+    const icon = document.getElementById('togglePassword');
+
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';  // Mostra la password
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        passwordField.type = 'password';  // Nasconde la password
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+});
+
+
+
+
+// FORMATTAZIONE NUMERO DI TELEFONO
+document.getElementById('telefono').addEventListener('input', function(event) {
+    let input = event.target.value.replace(/[^\d]/g, ''); // Rimuove tutto tranne i numeri
+
+    // Aggiungi i trattini dopo ogni terzina di numeri
+    if (input.length > 3 && input.length <= 6) {
+        input = input.replace(/(\d{3})(\d{0,3})/, '$1-$2');
+    } else if (input.length > 6) {
+        input = input.replace(/(\d{3})(\d{3})(\d{0,4})/, '$1-$2-$3');
+    }
+
+    event.target.value = input; // Imposta il valore formattato
+});
+
+
+
+
+
 // SCRIPT SIGNUP
 document.addEventListener("DOMContentLoaded", () => {
     let btnsignup = document.getElementById('bottonesignup');

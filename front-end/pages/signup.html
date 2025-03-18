@@ -7,6 +7,7 @@
     <title>Frasoltar - Signup</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/styles.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <header class="header-cont">
@@ -42,11 +43,11 @@
                     <label for="email">Email</label>
                     <input type="email" id="emailnew" name="email" required placeholder="Inserisci la tua email">
             
-                    <label for="password">Password</label>
+                    <label for="password">Password <i id="togglePassword" class="fa fa-eye" style="cursor: pointer;"></i> </label>
                     <input type="password" name="password" id="password" placeholder="Inserisci la tua password" required>
             
                     <label for="telefono">Telefono</label>
-                    <input type="tel" id="telefono" name="telefono" maxlength="10" pattern="[0-9]{10}" placeholder="Inserisci il tuo numero (10 cifre)" required>
+                    <input type="tel" id="telefono" name="telefono" maxlength="12" pattern="[0-9]{10}" placeholder="Inserisci il tuo numero (10 cifre)" required>
             
                     <button id="bottonesignup" type="submit">Registrati</button>
                 </form>
