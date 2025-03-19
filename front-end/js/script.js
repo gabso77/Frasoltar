@@ -634,3 +634,28 @@ function generatePDF() {
     };
 }
 
+
+
+ // Array di immagini da mostrare nei banner (sostituisci questi con i tuoi URL corretti)
+ const immagini = [
+    "https://www.burgerking.it/assets/img/console/carousel/slides/487_desktop_it.png?v=1741856534", // Prima immagine
+    "https://www.mediafarm.it/wp-content/uploads/2022/10/openday-ITS-apulia.png", // Seconda immagine
+    "https://scontent-fco2-1.xx.fbcdn.net/v/t39.30808-6/302077243_517369213721472_5095595690574633046_n.png?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=j94ng7pmqtsQ7kNvgHGVYfh&_nc_oc=AdlqDfvO5n1zFM05EGhZ4T04-mTdmf0JreSBNmIYV-9ix2dJbbC_8c8_dGeWI4MgxlM&_nc_zt=23&_nc_ht=scontent-fco2-1.xx&_nc_gid=KemfEd9hYbqeHUSJg4XTCA&oh=00_AYFgU5aKhEmunZByRF0513R64AMujohYyIYBDBFG4iNxSA&oe=67E075D9"  // Terza immagine
+];
+
+let currentImageIndex = 0;
+
+function cambiaBanner() {
+    // Cambia l'immagine per entrambi i banner
+    document.getElementById("banner-left").src = immagini[currentImageIndex];
+    document.getElementById("banner-right").src = immagini[currentImageIndex];
+
+    // Incrementa l'indice dell'immagine e ritorna al primo se si raggiunge la fine dell'array
+    currentImageIndex = (currentImageIndex + 1) % immagini.length;
+}
+
+// Cambia l'immagine ogni 10 secondi
+setInterval(cambiaBanner, 10000);
+
+// Carica inizialmente l'immagine
+cambiaBanner();

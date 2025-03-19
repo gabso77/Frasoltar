@@ -11,6 +11,7 @@ body {
     padding: 0; /* Rimuove padding di default */
     background-color: #f5f5dc; /* Colore di sfondo generale della pagina */
     overflow-x: hidden;
+    min-width: 30%;
 }
 
 /* Stile per il main */
@@ -27,9 +28,8 @@ main {
 .container {
     display: flex;
     flex-direction: column; /* Disporre in verticale */
-    background-color: #e6d4c9; /* Marroncino chiaro per il contenitore */
     padding: 40px;
-    min-width: 600px;
+    min-width: 70%;
     white-space: nowrap;
     background-image: url('../img/sfondo.jpg');
     color: #e7dcd4;
@@ -69,7 +69,7 @@ form {
 }
 
 body:not(.dark-mode) form {
-    background-color: white; /* Sfondo bianco per modalità chiara */
+    background-color: #e6d4c9; /* Sfondo bianco per modalità chiara */
     color: black; /* Colore del testo per modalità chiara */
 }
 
@@ -284,4 +284,10 @@ input:checked + .slider:before {
     height: auto; /* Mantiene le proporzioni */
     display: block;
     margin: 0 auto; /* Centra il logo */
+}
+
+.banner img {
+    width: 100%; /* I banner occupano il 100% della larghezza del contenitore */
+    height: 100%; /* I banner occupano il 100% dell'altezza del contenitore */
+
 }
