@@ -33,6 +33,9 @@ main {
     white-space: nowrap;
     background-image: url('../img/sfondo.jpg');
     color: #e7dcd4;
+    background-repeat: no-repeat; /* Impedisce che l'immagine si ripeta */
+    background-size: cover; /* Assicura che l'immagine copra l'intero contenitore */
+    background-position: center; /* Posiziona l'immagine al centro */
 }
 /* Header e menu */
 header {
@@ -57,8 +60,23 @@ nav a {
 form {
     display: flex;
     flex-direction: column; /* Disposizione verticale dei campi */
-    margin: 0 auto; /* Centro il modulo */
-    max-width: 400px; /* Larghezza massima del modulo */
+    max-width: 50%; /* Larghezza massima del modulo */
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    transition: background-color 0.3s ease;
+    word-wrap: break-word; /* Fa sì che il testo vada a capo se è troppo lungo */
+}
+
+body:not(.dark-mode) form {
+    background-color: white; /* Sfondo bianco per modalità chiara */
+    color: black; /* Colore del testo per modalità chiara */
+}
+
+/* Modalità scura */
+body.dark-mode form {
+    background-color: #333; /* Sfondo scuro per modalità scura */
+    color: white; /* Colore del testo per modalità scura */
 }
 
 /* Stile per i campi del modulo */
@@ -234,28 +252,8 @@ button:hover {
   input:checked + .slider:before {
     transform: translateX(26px);
   }
-  
-  form {
-    padding: 20px;
-    border-radius: 10px;
-    margin: 20px;
-    width: 100%;
-    max-width: 500px; /* Impostiamo una larghezza massima per evitare che il form sia troppo largo */
-    transition: background-color 0.3s ease;
-    word-wrap: break-word; /* Fa sì che il testo vada a capo se è troppo lungo */
-}
-body:not(.dark-mode) form {
-    background-color: white; /* Sfondo bianco per modalità chiara */
-    color: black; /* Colore del testo per modalità chiara */
-}
 
-/* Modalità scura */
-body.dark-mode form {
-    background-color: #333; /* Sfondo scuro per modalità scura */
-    color: white; /* Colore del testo per modalità scura */
-}
-
-
+/* Stile per href home */
   .home-btn {
     display: inline-block;
     margin-top: 15px;
