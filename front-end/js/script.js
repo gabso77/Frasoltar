@@ -635,7 +635,6 @@ function generatePDF() {
 }
 
 
-
  // Array di immagini da mostrare nei banner (sostituisci questi con i tuoi URL corretti)
  const immagini = [
     "https://www.burgerking.it/assets/img/console/carousel/slides/487_desktop_it.png?v=1741856534", // Prima immagine
