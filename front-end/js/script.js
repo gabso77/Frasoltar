@@ -313,17 +313,17 @@ function redirectToPage() {
     formData.append('data',data)
     fetch("http://127.0.0.1:8000/pullman/conferma_Prenotazione", {
         method: 'POST',
-          body: formData
+        body: formData
         })
-  .then((response)=> response.json())
-  .then((dati)=> {
-     if (dati.success == true) {
+.then((response)=> response.json())
+.then((dati)=> {
+    if (dati.success == true) {
         window.location.href = '../pages/acquistoeffettuato.html'
-     }
-     else {
+    }
+    else {
         window.location.href = '../pages/acquistoerrato.html'
-     }
-  })
+    }
+})
 }
 
 
