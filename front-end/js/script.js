@@ -633,4 +633,3 @@ function generatePDF() {
         alert("Errore: il logo non è stato trovato!");
     };
 }
-

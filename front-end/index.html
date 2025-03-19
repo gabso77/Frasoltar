@@ -8,6 +8,7 @@
     <title>Frasoltar</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/chat.css">
 </head>
 <body>
     <header class="header-cont">
@@ -89,7 +90,25 @@
             </section>
         </div>
         
+         <!-- Esempio di template Django o semplice file HTML -->
+<button id="chat-button" class="chat-button">Chat</button>
+  
+<div id="chat-modal" class="chat-modal" style="display: none;">
+  <div class="chat-header">
+    <h4>Assistente</h4>
+    <button id="close-chat" class="close-btn">X</button>
+  </div>
+  <div class="chat-body" id="chat-body"></div>
+  <div class="chat-footer">
+    <input type="text" id="chat-input" placeholder="Scrivi il tuo messaggio...">
+    <button id="send-chat">Invia</button>
+  </div>
+</div>
+
+
     </main>
     <script src="./js/script.js"></script>
+    <script src="./js/chat.js" defer></script>
+
 </body>
 </html>
