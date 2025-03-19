@@ -268,3 +268,20 @@ input:checked + .slider:before {
 .home-btn:hover {
     background-color: #0b7dda; /* Colore più scuro per hover */
 }
+
+#invoice {
+    width: 400px; /* Aumenta la larghezza */
+    margin: auto;
+    padding: 30px; /* Più spazio interno */
+    border: 2px solid #ccc; /* Bordo leggermente più spesso */
+    border-radius: 10px; /* Angoli arrotondati per un look più pulito */
+    background: white; /* Sfondo bianco per mantenere il contrasto */
+    color: black !important; 
+}
+
+#logo {
+    max-width: 200px; /* Limita la larghezza */
+    height: auto; /* Mantiene le proporzioni */
+    display: block;
+    margin: 0 auto; /* Centra il logo */
+}

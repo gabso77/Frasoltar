@@ -31,13 +31,23 @@
     </header>
     <main>
         <div class="container">
-    <form onsubmit="return false;">
-        <h3>✅ Grazie per aver acquistato da noi!</h3>
-        <h4>Qui sotto puoi scaricare il tuo biglietto.</h4>
-        <a href="../files/Ricevuta_Biglietto.pdf" class="home-btn">Scarica qui</a>
-    </form>
+            <form onsubmit="return false;">
+                <h3>✅ Grazie per aver acquistato da noi!</h3>
+                <div id="invoice">
+                    <img src="../img/newlogo.png" alt="Logo Azienda" id="logo">
+                    <h3>Ricevuta di Pagamento</h3>
+                    <p><strong>Numero:</strong> <span id="invoice-id"></span></p>
+                    <p><strong>Data:</strong> <span id="invoice-date"></span></p>
+                    <p><strong>Cliente:</strong> Mario Rossi</p>
+                    <p><strong>Importo:</strong> €100.00</p>
+                    <canvas id="qr-code"></canvas>
+                </div>
+                <button onclick="generatePDF()">Scarica PDF</button>
+            </form>
         </div>
     </main>
     <script src="../js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 </body>
 </html>

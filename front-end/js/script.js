@@ -557,3 +557,80 @@ document.getElementById('telefono').addEventListener('input', function(event) {
 
     event.target.value = input; // Imposta il valore formattato
 });
+
+
+// FILE PDF
+function generatePDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Genera un ID univoco per la ricevuta
+    const invoiceId = "INV-" + Math.floor(Math.random() * 100000);
+    const currentDate = new Date().toLocaleDateString();
+
+    // Creiamo un oggetto immagine per il logo
+    const logo = new Image();
+    logo.src = "../img/newlogo.png"; // Percorso del logo
+
+    logo.onload = function() {
+        const aspectRatio = logo.width / logo.height;
+        const logoWidth = 40; // Larghezza fissa
+        const logoHeight = logoWidth / aspectRatio; // Altezza calcolata automaticamente
+
+        // Aggiungiamo il logo in alto a destra
+        doc.addImage(logo, "PNG", 150, 10, logoWidth, logoHeight);
+
+        // Formattiamo il testo con più spazio tra le righe
+        const lineSpacing = 10; // Spazio tra le righe
+        let y = 40; // Posizione iniziale verticale
+
+        doc.setFontSize(16);
+        doc.text("Ricevuta di Pagamento", 20, y);
+        y += lineSpacing + 5; // Maggiore distanza sotto il titolo
+
+        doc.setFontSize(12);
+        doc.text(`Numero Ricevuta: ${invoiceId}`, 20, y);
+        y += lineSpacing;
+
+        doc.text(`Data: ${currentDate}`, 20, y);
+        y += lineSpacing;
+
+        doc.text(`Cliente: Mario Rossi`, 20, y);
+        y += lineSpacing;
+
+        doc.text(`Importo: €100.00`, 20, y);
+        y += lineSpacing * 2; // Più spazio prima del QR code
+
+        // Frase legale o di avviso
+        doc.setFontSize(10);
+        doc.setTextColor(100); // Grigio scuro
+        doc.text(
+            "Attenzione: questo documento ha valore solo ai sensi dell'Articolo 12 comma 3 del DPR 633/72.", 
+            20, y, { maxWidth: 170 }
+        );
+        y += lineSpacing;
+
+        doc.text(
+            "Conservare la ricevuta come prova di acquisto.", 
+            20, y, { maxWidth: 170 }
+        );
+        y += lineSpacing * 2; // Più spazio prima del QR code
+
+        // Genera e aggiunge il QR code
+        const qr = new QRious({
+            value: `https://www.tuosito.com/verifica-ricevuta?id=${invoiceId}`,
+            size: 100
+        });
+
+        const qrDataURL = qr.toDataURL();
+        doc.addImage(qrDataURL, "PNG", 80, y, 50, 50);
+
+        // Salva il PDF con nome univoco
+        doc.save(`ricevuta_${invoiceId}.pdf`);
+    };
+
+    logo.onerror = function() {
+        alert("Errore: il logo non è stato trovato!");
+    };
+}
+
