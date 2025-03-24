@@ -12,6 +12,7 @@ body {
     background-color: #f5f5dc; /* Colore di sfondo generale della pagina */
     overflow-x: hidden;
     min-width: 30%;
+    transition: background-color 0.3s ease;
 }
 
 /* Stile per il main */
@@ -21,6 +22,7 @@ main {
     justify-content: center; /* Centra orizzontalmente */
     min-height: calc(100vh - 60px); /* Uso invece di height */
     margin: 0; /* Assicura che non ci siano margini */
+    transition: background-color 0.3s ease;
 }
 
 
@@ -36,6 +38,7 @@ main {
     background-repeat: no-repeat; /* Impedisce che l'immagine si ripeta */
     background-size: cover; /* Assicura che l'immagine copra l'intero contenitore */
     background-position: center; /* Posiziona l'immagine al centro */
+    transition: background-color 0.3s ease;
 }
 /* Header e menu */
 header {
@@ -46,6 +49,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    transition: background-color 0.3s ease;
 }
 
 /* Link di navigazione */
@@ -54,6 +58,7 @@ nav a {
     text-decoration: none;
     color: #5b3a29; /* Colore del testo per i link */
     font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 /* Stile per il modulo */
@@ -286,8 +291,3 @@ input:checked + .slider:before {
     margin: 0 auto; /* Centra il logo */
 }
 
-.banner img {
-    width: 100%; /* I banner occupano il 100% della larghezza del contenitore */
-    height: 100%; /* I banner occupano il 100% dell'altezza del contenitore */
-
-}
