@@ -31,12 +31,13 @@ main {
     padding: 40px;
     min-width: 100%;
     white-space: nowrap;
-    background-image: url('../img/sfondo.jpg');
     color: #e7dcd4;
+    background-image: url('../img/sfondo.jpg');
     background-repeat: no-repeat; /* Impedisce che l'immagine si ripeta */
     background-size: cover; /* Assicura che l'immagine copra l'intero contenitore */
     background-position: center; /* Posiziona l'immagine al centro */
     transition: background-color 0.3s ease;
+    height: auto;
 }
 /* Header e menu */
 header {
@@ -50,17 +51,14 @@ header {
 }
 
 
-nav {
-    text-align: left;  /* Aggiungi questa regola per allineare il testo a sinistra */
-  }
 /* Link di navigazione */
 nav a {
-  
+    margin: 0 15px;
     text-decoration: none;
     color: #5b3a29; /* Colore del testo per i link */
-    
     transition: background-color 0.3s ease;
     text-align: left;
+    font-weight: bold;
 }
 
 /* Stile per il modulo */
@@ -113,23 +111,6 @@ button:hover {
 }
 
 
-.titolo-azienda {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: "Nunito Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 200;
-    font-style: normal;
-    font-variation-settings:
-    "wdth" 100,
-    "YTLC" 500;
-}
-
 .menu-cont {
     flex-grow: 1; /* permette di allargare il menu fino all'asse x */
     margin: 0 auto;
@@ -162,9 +143,7 @@ button:hover {
     font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
-    font-variation-settings:
-    "wdth" 100,
-    "YTLC" 500;
+    font-variation-settings: "wdth" 100, "YTLC" 500;
 }
 
 #username {
@@ -181,6 +160,7 @@ button:hover {
 .dark-mode .container {
     background-color: #574a40; /* Contenitore scuro */
 }
+
 .dark-mode button {
     background-color: #e6d4c9; /* Colore marrone scuro per il bottone */
     color: rgb(0, 0, 0); /* Colore del testo del bottone */
