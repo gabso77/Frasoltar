@@ -116,9 +116,9 @@ button:hover {
     margin: 0 auto;
     width: fit-content;
     position: relative;
-    left: 50%;
+    left: 100%;
     transform: translateX(-50%);
-    margin-right: 20px;
+    
 }
 
 .header-cont {
@@ -205,7 +205,7 @@ button:hover {
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    transition: 0.4s;
+    transition: 0.3s;
     border-radius: 34px;
 }
 
