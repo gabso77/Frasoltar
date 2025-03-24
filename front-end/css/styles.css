@@ -4,9 +4,7 @@ body {
     font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
-    font-variation-settings:
-    "wdth" 100,
-    "YTLC" 500;
+    font-variation-settings: "wdth" 100, "YTLC" 500;
     margin: 0; /* Rimuove margini di default */
     padding: 0; /* Rimuove padding di default */
     background-color: #f5f5dc; /* Colore di sfondo generale della pagina */
@@ -31,7 +29,7 @@ main {
     display: flex;
     flex-direction: column; /* Disporre in verticale */
     padding: 40px;
-    min-width: 70%;
+    min-width: 100%;
     white-space: nowrap;
     background-image: url('../img/sfondo.jpg');
     color: #e7dcd4;
@@ -42,23 +40,27 @@ main {
 }
 /* Header e menu */
 header {
-    background-color: rgb(233, 228, 228); /* Marroncino chiaro per l'intestazione */
-    padding: 20px;
-    position: relative; /* Posizione relativa per il posizionamento degli elementi */
-    z-index: 1; /* Porta l'header in primo piano */
+    background-color: rgb(233, 228, 228); /* Marroncino chiaro per l'intestazione */ 
     display: flex;
     align-items: center;
-    justify-content: space-between;
     transition: background-color 0.3s ease;
+    padding: 10px;
+    font-size: 20px;  /* Riduci la dimensione del font */
+    height: 150px;
 }
 
+
+nav {
+    text-align: left;  /* Aggiungi questa regola per allineare il testo a sinistra */
+  }
 /* Link di navigazione */
 nav a {
-    margin: 0 15px;
+  
     text-decoration: none;
     color: #5b3a29; /* Colore del testo per i link */
-    font-weight: bold;
+    
     transition: background-color 0.3s ease;
+    text-align: left;
 }
 
 /* Stile per il modulo */
@@ -147,12 +149,6 @@ button:hover {
     margin-left: 20px;
 }
 
-.testo-cont {
-    text-align: center;
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
 
 .claim-azienda{
     align-items: center;
@@ -186,7 +182,12 @@ button:hover {
     background-color: #574a40; /* Contenitore scuro */
 }
 .dark-mode button {
-    background-color: #e7dcd4; /* Colore del bottone in modalità scura */
+    background-color: #e6d4c9; /* Colore marrone scuro per il bottone */
+    color: rgb(0, 0, 0); /* Colore del testo del bottone */
+    padding: 10px;
+    border: none;
+    border-radius: 5px; /* Bordo arrotondato per il bottone */
+    cursor: pointer; /* Puntatore a mano sul bottone */
 }
 
 /* Stili per la modalità scura per l'header */
@@ -200,16 +201,6 @@ button:hover {
     color: #e7dcd4; /* Colore del testo per i link */
     font-weight: bold;
 }
-
-.dark-mode button {
-    background-color: #e6d4c9; /* Colore marrone scuro per il bottone */
-    color: rgb(0, 0, 0); /* Colore del testo del bottone */
-    padding: 10px;
-    border: none;
-    border-radius: 5px; /* Bordo arrotondato per il bottone */
-    cursor: pointer; /* Puntatore a mano sul bottone */
-}
-
 
 
 /* Stile per lo switch */
