@@ -387,18 +387,13 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         logoutBtn.style.display = "none";
     }
-});
 
-
-
-// LOGOUT
-document.addEventListener("DOMContentLoaded", function () {
-    const logoutBtn = document.getElementById("logout-btn");
+    // 👉 Aggiungi questa parte dentro il DOMContentLoaded
     if (logoutBtn) {
         logoutBtn.addEventListener("click", function (e) {
             e.preventDefault();
-            localStorage.removeItem("loggedInUser");
-            window.location.href = "/logout/";
+            localStorage.removeItem("loggedInUser"); // pulizia storage
+            window.location.href = "./pages/login.html"; // redirect diretto
         });
     }
 });
