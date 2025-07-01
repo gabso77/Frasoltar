@@ -328,7 +328,7 @@ function redirectToPage() {
 
 
 
-//SCRIPT LOGIN
+// SCRIPT LOGIN
 document.addEventListener("DOMContentLoaded", function () {
     if (window.location.pathname.endsWith("login.html")) {
 let loginForm = document.getElementById("loginForm");
@@ -371,17 +371,35 @@ let loginForm = document.getElementById("loginForm");
 // UTENTE LOGGATO
 document.addEventListener("DOMContentLoaded", function () {
     const loggedInUser = localStorage.getItem("loggedInUser");
-    
+
     const userInfoDiv = document.getElementById("user-info");
     const usernameSpan = document.getElementById("username");
     const signupBtn = document.getElementById("signup-btn");
     const loginBtn = document.getElementById("login-btn");
+    const logoutBtn = document.getElementById("logout-btn");
 
     if (loggedInUser) {
-        usernameSpan.textContent = loggedInUser; // Imposta il contenuto dell'elemento span con l'username
-        userInfoDiv.style.display = "block"; // Mostra il div con l'username
-        signupBtn.style.display = "none"; // Nasconde il bottone di registrazione
-        loginBtn.style.display = "none"; // Nasconde il bottone di login
+        usernameSpan.textContent = loggedInUser;
+        userInfoDiv.style.display = "block";
+        signupBtn.style.display = "none";
+        loginBtn.style.display = "none";
+        logoutBtn.style.display = "inline-block";
+    } else {
+        logoutBtn.style.display = "none";
+    }
+});
+
+
+
+// LOGOUT
+document.addEventListener("DOMContentLoaded", function () {
+    const logoutBtn = document.getElementById("logout-btn");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            localStorage.removeItem("loggedInUser");
+            window.location.href = "/logout/";
+        });
     }
 });
 

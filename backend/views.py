@@ -3,6 +3,7 @@ import json
 import os
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import logout
 from django.contrib.auth.hashers import check_password
 from django.http import HttpResponse, StreamingHttpResponse
 from .models import Prenotazione, Tratta
@@ -18,6 +19,13 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from openai import OpenAI
 # Create your views here.
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+
 
 def lista_citta(request):
     # Recupera tutti i prodotti dal database e li converte in una lista di dizionari
