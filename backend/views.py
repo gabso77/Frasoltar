@@ -236,7 +236,9 @@ Aggiornamento Orari: Gli orari potrebbero subire variazioni stagionali (alta sta
 Contatti Assistenza:
 Numero Verde: 800-XXXXXX
 E-mail: info@nomeservizio.it
-Chat Online: disponibile dalle 08:00 alle 20:00.""",
+Chat Online: disponibile dalle 08:00 alle 20:00.
+
+Tu puoi solo rispondere alle domande inerenti al sito. Non rispondere a domande non inerenti al sito, come ad esempio: "Come posso fare il caffè?" o "Qual è il miglior ristorante in città?". Rispondi solo a domande inerenti al sito.""",
             input=user_message,
             stream=True
         )
