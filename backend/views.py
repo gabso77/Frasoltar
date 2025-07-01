@@ -2,15 +2,20 @@ import asyncio
 import json
 import os
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.hashers import check_password
 from django.http import HttpResponse, StreamingHttpResponse
 from .models import Prenotazione, Tratta
-from .models import Citta
+from .models import Citta, Utenti
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib import messages
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
 from openai import OpenAI
 # Create your views here.
 
@@ -254,3 +259,24 @@ Chat Online: disponibile dalle 08:00 alle 20:00.""",
             yield f"data: {err_data}\n\n"
 
     return StreamingHttpResponse(sse_stream(), content_type='text/event-stream')
+
+
+
+@csrf_exempt
+def login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email', '').strip()
+        password = request.POST.get('password', '').strip()
+
+        user = Utenti.objects.filter(email=email).first()
+
+        # Debug output
+        print("Email:", email)
+        print("Password inserita:", password)
+        print("Utente trovato:", user)
+
+        if user and check_password(password, user.password):
+            auth_login(request, user)
+            return JsonResponse({'success': True, 'username': user.username})
+        else:
+            return JsonResponse({'success': False, 'error': 'Email o password errati.'}, status=401)

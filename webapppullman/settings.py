@@ -87,28 +87,28 @@ WSGI_APPLICATION = 'webapppullman.wsgi.application'
 
 
 #Marco
-DATABASES = {
-    'default': {
-        'ENGINE': 'mysql.connector.django',
-        'NAME': 'Prenotazioni_pullman',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
-
-#Gabriele
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
+#         'ENGINE': 'mysql.connector.django',
 #         'NAME': 'Prenotazioni_pullman',
 #         'USER': 'root',
-#         'PASSWORD': '',
+#         'PASSWORD': 'root',
 #         'HOST': 'localhost',
 #         'PORT': '3306',
 #     }
 # }
+
+#Gabriele
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'prenotazioni_pullman',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
 
 
 
@@ -151,3 +151,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CORS_ALLOW_ALL_ORIGINS = True

@@ -331,7 +331,8 @@ function redirectToPage() {
 //SCRIPT LOGIN
 document.addEventListener("DOMContentLoaded", function () {
     if (window.location.pathname.endsWith("login.html")) {
-    document.getElementById("loginForm").addEventListener("submit", async function (event) {
+let loginForm = document.getElementById("loginForm");
+    loginForm.addEventListener("submit", async function (event) {
     event.preventDefault(); // Evita il refresh della pagina
     
 
@@ -339,23 +340,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const password = document.getElementById("password").value;
     
     try {
-        // Recupera i dati dal file JSON con gli utenti registrati
-        const response = await fetch("../json/login.json"); 
+        let data = new FormData(loginForm); // Crea un oggetto FormData con i dati del modulo
+        
+        // Recupera i dati dal database con gli utenti registrati
+        const response = await fetch("http://127.0.0.1:8000/pullman/login", {
+            method: "POST",
+            body: data, // Invia i dati del modulo come body della richiesta
+        }); 
         if (!response.ok) {
             throw new Error("Impossibile caricare i dati utente.");
         }
-        const users = await response.json();
-
-        // Controlla se l'utente esiste e se la password è corretta
-        const user = users.find(u => u.email === email && u.password === password);
-
-        if (user) {
-            localStorage.setItem("loggedInUser", user.username);
-            window.location.href = "../index.html"; 
-        // Reindirizzamento alla pagina 
+        const result = await response.json();
+        if (result.success) {
+            localStorage.setItem("loggedInUser", result.username);
+            window.location.href = "../index.html";
         } else {
-            alert("Email o password errati!");
+            alert(result.error);
         }
+
     } catch (error) {
         console.error("Errore nel login:", error);
         alert("Si è verificato un errore. Riprova più tardi.");
@@ -461,8 +463,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             try {
-                // Ottiene il file login.json
-                const response = await fetch('../json/login.json');
+                // Ottiene il link
+                const response = await fetch('http://127.0.0.1:8000/prenotazioni_pullman/backend_utenti');
                 const data = await response.json(); // Aggiorna la variabile con await
 
                 // Controlla ogni oggetto nell'array
@@ -541,22 +543,6 @@ document.getElementById('togglePassword').addEventListener('click', function() {
     }
 });
 
-
-
-
-// FORMATTAZIONE NUMERO DI TELEFONO
-document.getElementById('telefono').addEventListener('input', function(event) {
-    let input = event.target.value.replace(/[^\d]/g, ''); // Rimuove tutto tranne i numeri
-
-    // Aggiungi i trattini dopo ogni terzina di numeri
-    if (input.length > 3 && input.length <= 6) {
-        input = input.replace(/(\d{3})(\d{0,3})/, '$1-$2');
-    } else if (input.length > 6) {
-        input = input.replace(/(\d{3})(\d{3})(\d{0,4})/, '$1-$2-$3');
-    }
-
-    event.target.value = input; // Imposta il valore formattato
-});
 
 
 // FILE PDF
