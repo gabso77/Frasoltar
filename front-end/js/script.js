@@ -388,7 +388,7 @@ document.addEventListener("DOMContentLoaded", function () {
         logoutBtn.style.display = "none";
     }
 
-    // 👉 Aggiungi questa parte dentro il DOMContentLoaded
+
     if (logoutBtn) {
         logoutBtn.addEventListener("click", function (e) {
             e.preventDefault();
