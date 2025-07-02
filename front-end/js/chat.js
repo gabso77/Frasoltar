@@ -15,7 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
     closeChat.addEventListener('click', function() {
       chatModal.style.display = 'none';
     });
-  
+    
+
+    // Invia messaggio da tastiera
     chatInput.addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
         event.preventDefault(); // Impedisce invio form o newline
