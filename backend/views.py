@@ -4,6 +4,7 @@ import os
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout
+from django.db import IntegrityError
 from django.contrib.auth.hashers import check_password
 from django.http import HttpResponse, StreamingHttpResponse
 from .models import Prenotazione, Tratta
@@ -19,8 +20,6 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from openai import OpenAI
 # Create your views here.
-
-import json
 
 @csrf_exempt
 def registra_persona(request):
@@ -39,19 +38,23 @@ def registra_persona(request):
         if not all([nome, cognome, email, username, telefono, password]):
             return JsonResponse({'errore': 'Dati mancanti'}, status=400)
 
-        # Crea l'utente (ti consiglio di hashare la password!)
-        Utenti.objects.create(
-            nome=nome,
-            cognome=cognome,
-            email=email,
-            username=username,
-            telefono=telefono,
-            password=make_password(password)
-        )
+        try:
+            Utenti.objects.create(
+                nome=nome,
+                cognome=cognome,
+                email=email,
+                username=username,
+                telefono=telefono,
+                password=make_password(password)
+            )
+        except IntegrityError:
+            return JsonResponse({'errore': 'Email già registrata'}, status=409)
 
         return JsonResponse({'messaggio': 'Registrazione completata'})
 
     return JsonResponse({'errore': 'Metodo non supportato'}, status=405)
+
+
 
 
 def logout_view(request):

@@ -467,7 +467,7 @@ if (registerResponse.ok) {
     document.getElementById('signupForm').reset();
 } else {
     const errorData = await registerResponse.json();
-    alert('❌ Errore durante la registrazione: ' + (errorData.detail || registerResponse.statusText));
+alert('❌ Errore durante la registrazione: ' + (errorData.errore || registerResponse.statusText));
 
                 }
 
