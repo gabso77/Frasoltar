@@ -16,6 +16,14 @@ document.addEventListener('DOMContentLoaded', function() {
       chatModal.style.display = 'none';
     });
   
+    chatInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault(); // Impedisce invio form o newline
+        sendChat.click(); // Simula il click sul bottone
+      }
+    });
+
+
     // Invia messaggio
     sendChat.addEventListener('click', function() {
       const message = chatInput.value.trim();
