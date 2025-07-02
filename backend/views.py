@@ -20,22 +20,38 @@ from django.contrib.auth.models import User
 from openai import OpenAI
 # Create your views here.
 
+import json
+
 @csrf_exempt
 def registra_persona(request):
     if request.method == 'POST':
-        nome = request.POST.get('nome')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
+        try:
+            data = json.loads(request.body)
+            nome = data.get('nome')
+            cognome = data.get('cognome')
+            email = data.get('email')
+            username = data.get('username')
+            telefono = data.get('telefono')
+            password = data.get('password')
+        except json.JSONDecodeError:
+            return JsonResponse({'errore': 'Formato JSON non valido'}, status=400)
 
-        if not all([nome, email, password]):
+        if not all([nome, cognome, email, username, telefono, password]):
             return JsonResponse({'errore': 'Dati mancanti'}, status=400)
 
-        Utenti.objects.create(nome=nome, email=email, password=password)
+        # Crea l'utente (ti consiglio di hashare la password!)
+        Utenti.objects.create(
+            nome=nome,
+            cognome=cognome,
+            email=email,
+            username=username,
+            telefono=telefono,
+            password=make_password(password)
+        )
+
         return JsonResponse({'messaggio': 'Registrazione completata'})
-    
+
     return JsonResponse({'errore': 'Metodo non supportato'}, status=405)
-
-
 
 
 def logout_view(request):

@@ -444,23 +444,31 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             try {
-                // Ottiene il link
-                const response = await fetch('http://127.0.0.1:8000/prenotazioni_pullman/backend_utenti');
-                const data = await response.json(); // Aggiorna la variabile con await
 
-                // Controlla ogni oggetto nell'array
-                for (const user of data) {
-                    if (emailForm === user.email) { // Confronto stretto
-                        emailExists = true; // Imposta la variabile booleana su true
-                        break; // Esci dal ciclo
-                    }
-                }
+const newUser = {
+    email: emailForm,
+    username: usernameForm,
+    nome: nomeForm,
+    cognome: cognomeForm,
+    password: passwordForm,
+    telefono: telefonoForm
+};
 
-                // Se l'email esiste, mostra un avviso
-                if (emailExists) {
-                    alert('Questa email è già registrata.');
-                } else {
-                    alert('Registrazione completata con successo!'); // Puoi eseguire altre azioni qui, come inviare il modulo
+const registerResponse = await fetch('http://127.0.0.1:8000/pullman/signup', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newUser)
+});
+
+if (registerResponse.ok) {
+    alert('✅ Registrazione completata con successo!');
+    document.getElementById('signupForm').reset();
+} else {
+    const errorData = await registerResponse.json();
+    alert('❌ Errore durante la registrazione: ' + (errorData.detail || registerResponse.statusText));
+
                 }
 
             } catch (error) {
@@ -469,6 +477,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });  
     }
 });
+
+
 
 
 
