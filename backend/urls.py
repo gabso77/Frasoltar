@@ -9,6 +9,6 @@ urlpatterns = [
     path('conferma_Prenotazione', views.conferma_Prenotazione, name='conferma_Prenotazione'),
     path('chat', views.stream_assistant, name='chat'),
     path('login', views.login, name='login'),
-    # path('signup', views.signup, name='signup'),
+    path('signup', views.registra_persona, name='signup'),
     path('logout', logout_view, name='logout')
 ]

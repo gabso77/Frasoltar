@@ -20,6 +20,23 @@ from django.contrib.auth.models import User
 from openai import OpenAI
 # Create your views here.
 
+@csrf_exempt
+def registra_persona(request):
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        if not all([nome, email, password]):
+            return JsonResponse({'errore': 'Dati mancanti'}, status=400)
+
+        Utenti.objects.create(nome=nome, email=email, password=password)
+        return JsonResponse({'messaggio': 'Registrazione completata'})
+    
+    return JsonResponse({'errore': 'Metodo non supportato'}, status=405)
+
+
+
 
 def logout_view(request):
     logout(request)

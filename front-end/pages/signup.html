@@ -7,6 +7,7 @@
     <title>Frasoltar - Signup</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/chat.css">
     <link rel="stylesheet" href="../css/styles.css"> 
 </head>
@@ -22,7 +23,7 @@
                     <span class="slider"></span>
                 </label>
                 <a href="../index.html">Home</a>
-                <a href="./login.html">Accedi</a>
+                <a href="./login.html" id="login-btn">Accedi</a>
             </nav>
         </div>
     </header>
@@ -30,7 +31,7 @@
         <div class="container">
             <section id="signup">
                 <h2>✍️ Registrazione</h2>
-                <form id="signupForm" method="get">
+                <form id="signupForm" method="post" action="http://127.0.0.1:8000/signup/">
                     <label for="username">Username</label>
                     <input type="text" id="usernamenew" name="username" required placeholder="Inserisci il tuo username">
             
