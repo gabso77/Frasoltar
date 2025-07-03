@@ -575,7 +575,7 @@ function generatePDF() {
         doc.text(`Cliente: Mario Rossi`, 20, y);
         y += lineSpacing;
 
-        doc.text(`Importo: €100.00`, 20, y);
+        doc.text(`Importo: €10.00`, 20, y);
         y += lineSpacing * 2; // Più spazio prima del QR code
 
         // Frase legale o di avviso
